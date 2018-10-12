@@ -34,7 +34,8 @@
       height: 20%;
     }
 
-    .btn {
+    .btn,
+    .btn--reset {
       color: #FFF;
       font-weight: 500;
       border: 0;
@@ -70,7 +71,7 @@
     </tr>
     <tr class="actions">
       <td><button class="btn btn--plus" data-action="add" data-target="left">👍</button><button class="btn btn--sub" data-action="sub" data-target="left">👎</button></td>
-      <td><button class="btn btn--reset" id="reset">RESET</button></td>
+      <td><button class="btn--reset" id="reset">RESET</button></td>
       <td><button class="btn btn--plus" data-action="add" data-target="right">👍</button><button class="btn btn--sub" data-action="sub" data-target="right">👎</button></td>
     </tr>
   </table>
@@ -86,7 +87,13 @@
     };
 
     function reset() {
+      score = {
+        left: 0,
+        right: 0,
+      };
 
+      scoreBoards.left.innerHTML = score.left;
+      scoreBoards.right.innerHTML = score.right;
     }
 
     function updateScore(event) {
@@ -101,6 +108,7 @@
       scoreBoards[target].innerHTML = score[target];
     }
 
+    document.getElementById('reset').addEventListener('click', reset);
     var buttons = document.querySelectorAll('.btn');
     for (let index = 0; index < buttons.length; index++) {
       buttons[index].addEventListener('click', updateScore);
