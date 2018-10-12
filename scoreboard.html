@@ -54,57 +54,81 @@
     }
 
     .btn--reset {
-      background-color: #000000;
+      background-color: black;
     }
   </style>
 </head>
 <body>
+  <script>
+    function test(arg) {
+      alert('from test function');
+      alert(arg)
+    }
+
+    var left = 0;
+
+    var right = 0;
+
+    var modes = {
+      eleven: {
+        rythm: 2
+      },
+      twentyone: {
+        rythm: 5
+      },
+      time: {
+        duration: 5,
+        rythm: 3,
+      }
+    }
+
+    function reset() {
+      alert('whatever');
+    }
+
+    function updateScore(action, target) {
+      var blockRight = document.getElementById('score--right');
+      var blockLeft = document.getElementById('score--left');
+
+      if (action === 'reset') {
+        left = 0;
+        right = 0;
+      }
+      if (action === 'add') {
+        if (target === 'left') {
+          left += 1
+        } else if (target === 'right') {
+          right +=1
+        }
+      }
+
+      if (action === 'undo') {
+        if (target === 'left') {
+          left -= 1
+        } else if (target === 'right') {
+          right -=1
+        }
+      }
+      
+      blockRight.innerHTML = right;
+      blockLeft.innerHTML = left;
+    }
+
+  </script>
   <div class="logo">
     <span>🏓</span>
   </div>
   <table>
     <tr class="score">
-      <td><span class="score--left">0</span></td>
+      <td onclick="updateScore('add', 'left')"><span id="score--left">0</span></td>
       <td></td>
-      <td><span class="score--right">0</span></td>
+      <td onclick="updateScore('add', 'right')" ><span id="score--right">0</span></td>
     </tr>
     <tr class="actions">
-      <td><button class="btn btn--plus" data-action="add" data-target="left">👍</button><button class="btn btn--sub" data-action="sub" data-target="left">👎</button></td>
-      <td><button class="btn btn--reset" id="reset">RESET</button></td>
-      <td><button class="btn btn--plus" data-action="add" data-target="right">👍</button><button class="btn btn--sub" data-action="sub" data-target="right">👎</button></td>
+      <td><button class="btn btn--plus" data-action="add" data-target="left" onclick="updateScore('undo', 'left')">undo</button></td>
+      <td><button class="btn btn--reset" id="reset" onclick="updateScore('reset', 'none')">RESET</button></td>
+      <td><button class="btn btn--sub" data-action="sub" data-target="right" onclick="updateScore('undo', 'right')">undo</button></td>
     </tr>
   </table>
-  <script>
-    var score = {
-      left: 0,
-      right: 0,
-    };
-
-    var scoreBoards = {
-      left: document.querySelector('.score--left'),
-      right: document.querySelector('.score--right'),
-    };
-
-    function reset() {
-
-    }
-
-    function updateScore(event) {
-      var action = event.target.dataset.action;
-      var target = event.target.dataset.target;
-      if (action === 'add') {
-        score[target] += 1;
-      } else if (action === 'sub') {
-        score[target] = score[target] === 0 ? 0 : score[target] - 1;
-      }
-
-      scoreBoards[target].innerHTML = score[target];
-    }
-
-    var buttons = document.querySelectorAll('.btn');
-    for (let index = 0; index < buttons.length; index++) {
-      buttons[index].addEventListener('click', updateScore);
-    }
-  </script>
 </body>
 </html>
