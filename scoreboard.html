@@ -11,11 +11,6 @@
       font-family: sans-serif;
     }
 
-    .logo {
-      position: absolute;
-      font-size: 3em;
-    }
-
     table {
       width: 100%;
       height: 100%;
@@ -34,6 +29,10 @@
       height: 20%;
     }
 
+    .middle {
+      width: 10%;
+    }
+
     .btn {
       color: #FFF;
       font-weight: 500;
@@ -45,8 +44,23 @@
       text-decoration: none;
     }
 
-    .btn--plus {
-      background-color: #F4F4F4;
+    .mode {
+      font-size: 0.15em;
+      padding: 1.5em;
+      text-decoration: none;
+      width: 100%;
+      border: solid 1px black;
+      border-radius: 5px;
+    }
+
+    .black {
+      background: black;
+      color: white;
+    }
+
+    .white {
+      background: white;
+      color: black;
     }
 
     .btn--sub {
@@ -60,74 +74,91 @@
 </head>
 <body>
   <script>
-    function test(arg) {
-      alert('from test function');
-      alert(arg)
-    }
+    var player1 = 0;
+    var player2 = 0;
+    var mode;
 
-    var left = 0;
-
-    var right = 0;
-
-    var modes = {
-      eleven: {
-        rythm: 2
-      },
-      twentyone: {
-        rythm: 5
-      },
-      time: {
-        duration: 5,
-        rythm: 3,
+    function determineServe(mode) {
+      var totScore = player1 + player2;
+      if (mode === 'short') {
+        var serving = Math.floor(totScore/2);
+      } else if (mode === 'long') {
+        var serving = Math.floor(totScore/5);
+      } else if (mode === 'time') {
+        var serving = Math.floor(totScore/3);
       }
+
+      if (serving%2 === 0) {
+        return 'player1'
+      }
+      
+      return 'player2'
     }
 
-    function reset() {
-      alert('whatever');
+    function updateMode(selection) {
+      var modeButton = document.getElementById(selection);
+      mode = selection
+      modeButton.style.background = 'black';
+      modeButton.style.color = 'white';
     }
 
     function updateScore(action, target) {
-      var blockRight = document.getElementById('score--right');
-      var blockLeft = document.getElementById('score--left');
-
+      var blockRight = document.getElementById('score--player2');
+      var blockLeft = document.getElementById('score--player1');
       if (action === 'reset') {
-        left = 0;
-        right = 0;
+        player1 = 0;
+        player2 = 0;
       }
       if (action === 'add') {
-        if (target === 'left') {
-          left += 1
-        } else if (target === 'right') {
-          right +=1
+        if (target === 'player1') {
+          player1 += 1
+        } else if (target === 'player2') {
+          player2 +=1
         }
       }
 
       if (action === 'undo') {
-        if (target === 'left') {
-          left -= 1
-        } else if (target === 'right') {
-          right -=1
+        if (target === 'player1') {
+          player1 -= 1
+        } else if (target === 'player2') {
+          player2 -=1
         }
       }
       
-      blockRight.innerHTML = right;
-      blockLeft.innerHTML = left;
+      blockRight.innerHTML = player2;
+      blockLeft.innerHTML = player1;
+      console.log(mode);
+      if (determineServe(mode) === 'player1') {
+        blockLeft.style.background = 'white'
+        blockLeft.style.color = 'black'
+        blockRight.style.background = 'black'
+        blockRight.style.color = 'white'
+        return
+      }
+
+      blockLeft.style.background = 'black'
+      blockLeft.style.color = 'white'
+      blockRight.style.background = 'white'
+      blockRight.style.color = 'black'
+
     }
 
   </script>
-  <div class="logo">
-    <span>🏓</span>
-  </div>
+
   <table>
     <tr class="score">
-      <td onclick="updateScore('add', 'left')"><span id="score--left">0</span></td>
-      <td></td>
-      <td onclick="updateScore('add', 'right')" ><span id="score--right">0</span></td>
+      <td onclick="updateScore('add', 'player1')" id="score--player1">0</td>
+      <td class="middle">
+        <button class="mode btn-mode" onclick="updateMode('short')" id="short" >Short (11)</button><br />
+        <button class="mode btn-mode" onclick="updateMode('long')" id="long" >Long (21)</button><br />
+        <button class="mode btn-mode" onclick="updateMode('time')" id="time" >Time (5:00)</button><br />
+      </td>
+      <td onclick="updateScore('add', 'player2')" id="score--player2">0</td>
     </tr>
     <tr class="actions">
-      <td><button class="btn btn--plus" data-action="add" data-target="left" onclick="updateScore('undo', 'left')">undo</button></td>
+      <td><button class="btn btn--plus" data-action="add" data-target="player1" onclick="updateScore('undo', 'player1')">undo</button></td>
       <td><button class="btn btn--reset" id="reset" onclick="updateScore('reset', 'none')">RESET</button></td>
-      <td><button class="btn btn--sub" data-action="sub" data-target="right" onclick="updateScore('undo', 'right')">undo</button></td>
+      <td><button class="btn btn--sub" data-action="sub" data-target="player2" onclick="updateScore('undo', 'player2')">undo</button></td>
     </tr>
   </table>
 </body>
