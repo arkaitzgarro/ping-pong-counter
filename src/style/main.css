@@ -1,0 +1,132 @@
+html, body {
+  box-sizing: border-box;
+  font-family: Helvetica, sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+canvas {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.btn {
+  position: absolute;
+  font-weight: 500;
+  border: 0;
+  border-radius: 5px;
+  font-size: 1.5em;
+  padding: 1.5em;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.btn__game--short {
+  background-color: #FFF;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  color: #000;
+  bottom: 330px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.btn__game--long {
+  background-color: #FFF;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  color: #000;
+  bottom: 200px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.btn__game--selected {
+  background-color: #000;
+  color: #FFF;
+}
+
+.btn--reset {
+  background-color: rgb(230, 80, 80);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+  color: #FFF;
+  bottom:50px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.scoreboard {
+  position: relative;
+  height: 100%;
+}
+
+.actions {
+  position: absolute;
+  left: 40%;
+  width: 20%;
+  height: 100%;
+}
+
+.player {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.player--blue {
+  cursor: pointer;
+  background-color: rgb(64, 159, 255, 0.5);
+  right: 50%;
+  left: 0;
+}
+
+.player--red {
+  cursor: pointer;
+  background-color: rgb(230, 80, 80, 0.5);
+  right: 0;
+  left: 50%;
+}
+
+.serve {
+  display: none;
+  transition-property: left;
+  transition-duration: 0.5s;
+  font-size: 4em;
+  position: absolute;
+  top: 60%;
+  -webkit-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
+.serve--blue .serve {
+  display: block;
+  left: 25%;
+}
+
+.serve--red .serve {
+  display: block;
+  left: 75%;
+}
+
+.score {
+  font-size: 15em;
+  font-weight: bold;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -40%);
+      -ms-transform: translate(-50%, -40%);
+          transform: translate(-50%, -40%);
+}
