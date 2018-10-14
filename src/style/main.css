@@ -18,12 +18,13 @@ html, body {
   font-size: 1.5em;
   padding: 1.5em;
   text-decoration: none;
+  z-index: 1;
 }
 
 .btn__game--short {
-  background-color: #000;
+  background-color: #FFF;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  color: #FFF;
+  color: #000;
   bottom: 330px;
   left: 50%;
   -webkit-transform: translate(-50%);
@@ -32,14 +33,19 @@ html, body {
 }
 
 .btn__game--long {
-  background-color: #000;
+  background-color: #FFF;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  color: #FFF;
+  color: #000;
   bottom: 200px;
   left: 50%;
   -webkit-transform: translate(-50%);
       -ms-transform: translate(-50%);
           transform: translate(-50%);
+}
+
+.btn__game--selected {
+  background-color: #000;
+  color: #FFF;
 }
 
 .btn--reset {
@@ -85,13 +91,24 @@ html, body {
 
 .serve {
   display: none;
+  transition-property: left;
+  transition-duration: 0.5s;
   font-size: 4em;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 60%;
   -webkit-transform: translate(-50%, 0);
       -ms-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
+}
+
+.serve--blue .serve {
+  display: block;
+  left: 25%;
+}
+
+.serve--red .serve {
+  display: block;
+  left: 75%;
 }
 
 .score {

@@ -8,19 +8,18 @@
 </head>
 <body>
   <div class="scoreboard" data-controller="game">
-    <div class="player player--blue">
-      <span class="score">0</span>
-      <span class="serve">🏓</span>
+    <div class="player player--blue" data-player="blue" data-action="click->game#updateScore">
+      <span class="score" data-player="blue" data-target="game.scoreBlue">0</span>
     </div>
-    <div class="player player--red">
-      <span class="score">0</span>
-      <span class="serve">🏓</span>
+    <div class="player player--red" data-player="red" data-action="click->game#updateScore">
+      <span class="score" data-player="red" data-target="game.scoreRed">0</span>
     </div>
     <div class="actions">
-      <button id="game--short" class="btn btn__game--short">Short&nbsp;(11)</button>
-      <button id="game--long" class="btn btn__game--long">Long&nbsp;(21)</button>
-      <button id="reset" class="btn btn--reset">RESET</button>
+      <button id="game--short" class="btn btn__game--short" data-game="short" data-action="game#selectGame">Short&nbsp;(11)</button>
+      <button id="game--long" class="btn btn__game--long" data-game="long" data-action="game#selectGame">Long&nbsp;(21)</button>
+      <button id="reset" class="btn btn--reset" data-action="game#reset">RESET</button>
     </div>
+    <span class="serve">🏓</span>
   </div>
 </body>
 </html>
