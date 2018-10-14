@@ -1,0 +1,40 @@
+{
+  "name": "ping-pong-scoreboard",
+  "version": "1.0.0",
+  "description": "A simple ping pong scoreboard made with JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode=production",
+    "start": "webpack-dev-server --mode=development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkaitzgarro/ping-pong-counter.git"
+  },
+  "keywords": [
+    "ping",
+    "pong",
+    "scoreboard"
+  ],
+  "author": "Arkaitz Garro, Tobia Donati",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arkaitzgarro/ping-pong-counter/issues"
+  },
+  "homepage": "https://github.com/arkaitzgarro/ping-pong-counter#readme",
+  "devDependencies": {
+    "@babel/core": "7.1.2",
+    "@babel/plugin-proposal-class-properties": "7.1.0",
+    "@babel/preset-env": "7.1.0",
+    "babel-loader": "8.0.4",
+    "css-loader": "1.0.0",
+    "html-webpack-plugin": "3.2.0",
+    "mini-css-extract-plugin": "0.4.4",
+    "webpack": "4.20.2",
+    "webpack-cli": "3.1.2",
+    "webpack-dev-server": "3.1.9"
+  },
+  "dependencies": {
+    "stimulus": "1.1.0"
+  }
+}
