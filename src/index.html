@@ -9,10 +9,12 @@
 <body>
   <div class="scoreboard" data-controller="game">
     <div class="player player--blue" data-player="blue" data-action="click->game#updateScore">
-      <span class="score" data-player="blue" data-target="game.scoreBlue">0</span>
+      <canvas data-target="game.confettiBlue"></canvas>
+      <span class="score" data-target="game.scoreBlue">0</span>
     </div>
     <div class="player player--red" data-player="red" data-action="click->game#updateScore">
-      <span class="score" data-player="red" data-target="game.scoreRed">0</span>
+      <canvas data-target="game.confettiRed"></canvas>
+      <span class="score" data-target="game.scoreRed">0</span>
     </div>
     <div class="actions">
       <button id="game--short" class="btn btn__game--short" data-game="short" data-action="game#selectGame">Short&nbsp;(11)</button>

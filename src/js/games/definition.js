@@ -3,12 +3,16 @@ export default {
     points: Infinity,
     switchServe: Infinity
   },
-  short: {
-    points: 11,
-    switchServe: 2
+  short() {
+    return {
+      points: 11,
+      switchServe: 2
+    };
   },
-  long: {
-    points: 21,
-    switchServe: 5
+  long() {
+    return {
+      points: 21,
+      switchServe: 5
+    };
   }
 };
