@@ -55,7 +55,7 @@ canvas {
 }
 
 .btn--reset {
-  background-color: rgb(230, 80, 80);
+  background-color: rgb(0, 0, 0);
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
   color: #FFF;
   bottom:50px;
@@ -85,14 +85,14 @@ canvas {
 
 .player--blue {
   cursor: pointer;
-  background-color: rgb(64, 159, 255, 0.5);
+  background-color: rgb(64, 159, 255);
   right: 50%;
   left: 0;
 }
 
 .player--red {
   cursor: pointer;
-  background-color: rgb(230, 80, 80, 0.5);
+  background-color: rgb(230, 80, 80);
   right: 0;
   left: 50%;
 }
@@ -122,7 +122,6 @@ canvas {
 .score {
   font-size: 15em;
   font-weight: bold;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 40%;
   left: 50%;
