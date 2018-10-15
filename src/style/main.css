@@ -8,6 +8,7 @@ html, body {
 
 *, *:before, *:after {
   box-sizing: inherit;
+  user-select: none;
 }
 
 canvas {
@@ -55,9 +56,20 @@ canvas {
 }
 
 .btn--reset {
-  background-color: rgb(0, 0, 0);
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  color: #FFF;
+  background-color: #DDDDDD;
+  color: #000;
+  padding: 1em 1.5em;
+  bottom:50px;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+      -ms-transform: translate(-50%);
+          transform: translate(-50%);
+}
+
+.btn--undo {
+  background-color: #DDDDDD;
+  color: #000;
+  padding: 1em 1.5em;
   bottom:50px;
   left: 50%;
   -webkit-transform: translate(-50%);

@@ -8,7 +8,9 @@ export default class extends Controller {
     'scoreBlue',
     'scoreRed',
     'confettiBlue',
-    'confettiRed'
+    'confettiRed',
+    'btnShort',
+    'btnLong'
   ]
 
   connect() {
@@ -19,10 +21,11 @@ export default class extends Controller {
     this.confettiBlueTarget.height = window.innerHeight;
     this.confettiRedTarget.width = window.innerWidth / 2;
     this.confettiRedTarget.height = window.innerHeight;
+
+    this.render();
   }
 
   init() {
-    this.game = null;
     this.serve = null;
     this.score = {
       blue: 0,
@@ -30,13 +33,14 @@ export default class extends Controller {
     }
     this.winner = null;
     this.confetti = null;
+    this.game = games.short();
   }
 
   selectGame(event) {
     this.clearConfetti();
     this.init();
     this.game = games[event.target.dataset.game]();
-    this.updateView();
+    this.render();
   }
 
   updateScore(event) {
@@ -55,23 +59,7 @@ export default class extends Controller {
 
     this.determineWinner();
     this.determineServe(player);
-    this.updateView();
-  }
-
-  updateView() {
-    // Update the scores
-    this.scoreBlueTarget.innerHTML = this.score.blue;
-    this.scoreRedTarget.innerHTML = this.score.red;
-
-    // Show the paddle for the player serving
-    this.element.classList.toggle('serve--blue', this.serve === 'blue');
-    this.element.classList.toggle('serve--red', this.serve === 'red');
-
-    if (this.winner) {
-      const canvas = this.winner === 'blue' ? this.confettiBlueTarget : this.confettiRedTarget;
-      this.confetti = new Confetti(canvas);
-      this.confetti.draw();
-    }
+    this.render();
   }
 
   determineWinner() {
@@ -101,12 +89,45 @@ export default class extends Controller {
   reset() {
     this.clearConfetti();
     this.init();
-    this.updateView();
+    this.render();
   }
 
   clearConfetti() {
     if (this.confetti) {
       this.confetti.clear();
+    }
+  }
+
+  undoScore(event) {
+    event.stopPropagation();
+
+    // Only undo score is someone is already serving
+    if (this.serve) {
+      this.determineServe();
+      const player = event.target.dataset.player;
+      this.score[player]--;
+
+      this.render();
+    }
+  }
+
+  render() {
+    // Update the scores
+    this.scoreBlueTarget.innerHTML = this.score.blue;
+    this.scoreRedTarget.innerHTML = this.score.red;
+
+    // Show the paddle for the player serving
+    this.element.classList.toggle('serve--blue', this.serve === 'blue');
+    this.element.classList.toggle('serve--red', this.serve === 'red');
+
+    // Select active game
+    this.btnShortTarget.classList.toggle('btn__game--selected', this.game.name === 'short');
+    this.btnLongTarget.classList.toggle('btn__game--selected', this.game.name === 'long');
+
+    if (this.winner) {
+      const canvas = this.winner === 'blue' ? this.confettiBlueTarget : this.confettiRedTarget;
+      this.confetti = new Confetti(canvas);
+      this.confetti.draw();
     }
   }
 }
