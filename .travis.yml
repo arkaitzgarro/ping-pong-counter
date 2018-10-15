@@ -9,4 +9,4 @@ node_js:
 script: yarn build
 after_success:
   - pip install --user awscli
-  - aws s3 cp dist s3://$AWS_BUCKET_NAME/ --recursive
+  - aws s3 cp dist s3://terraformapply.com/ --recursive --acl="public-read"
