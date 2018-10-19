@@ -100,15 +100,16 @@ export default class extends Controller {
 
   undoScore(event) {
     event.stopPropagation();
+    const player = event.target.dataset.player;
 
-    // Only undo score is someone is already serving
-    if (this.serve) {
-      this.determineServe();
-      const player = event.target.dataset.player;
-      this.score[player]--;
+    if (this.winner) return;
+    if (!this.serve) return;
+    if (this.score[player] === 0) return;
 
-      this.render();
-    }
+    this.determineServe();
+    this.score[player]--;
+
+    this.render();
   }
 
   render() {
