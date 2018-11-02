@@ -1,3 +1,4 @@
+import io from 'socket.io-client';
 import { Controller } from 'stimulus';
 
 import games from '../games/definition';
@@ -22,6 +23,7 @@ export default class extends Controller {
     this.confettiRedTarget.width = window.innerWidth / 2;
     this.confettiRedTarget.height = window.innerHeight;
 
+    this.registerSocket();
     this.render();
   }
 
@@ -36,6 +38,13 @@ export default class extends Controller {
     this.game = games.short();
   }
 
+  registerSocket() {
+    this.socket = io('https://summer-partridge.glitch.me/');
+    this.socket.on('score', (player) => this.updateScore(player));
+    this.socket.on('undo', (player) => this.undoScore(player));
+    this.socket.on('reset', () => this.reset());
+  }
+
   selectGame(event) {
     this.clearConfetti();
     this.init();
@@ -43,14 +52,16 @@ export default class extends Controller {
     this.render();
   }
 
-  updateScore(event) {
+  handlePlayerClick(event) {
     event.stopPropagation();
 
+    this.updateScore(event.currentTarget.dataset.player);
+  }
+
+  updateScore(player) {
     if (!this.game || this.winner) {
       return;
     }
-
-    const player = event.currentTarget.dataset.player;
 
     // Only update score is someone is already serving
     if (this.serve) {
@@ -98,10 +109,13 @@ export default class extends Controller {
     }
   }
 
-  undoScore(event) {
+  handleUndoClick(event) {
     event.stopPropagation();
-    const player = event.target.dataset.player;
 
+    this.undoScore(event.currentTarget.dataset.player);
+  }
+
+  undoScore(player) {
     if (this.winner) return;
     if (!this.serve) return;
     if (this.score[player] === 0) return;

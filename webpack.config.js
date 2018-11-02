@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, argv) => ({
-  entry: './src/js/main.js',
+  entry: './client/js/main.js',
   output: {
     filename: '[name].[contenthash].js',
     path: path.resolve(__dirname, 'dist')
@@ -14,7 +14,7 @@ module.exports = (env, argv) => ({
       filename: "[name].[hash].css"
     }),
     new HtmlWebpackPlugin({
-      template: 'src/index.html'
+      template: 'client/index.html'
     })
   ],
   module: {
