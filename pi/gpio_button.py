@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from gpiozero import Button
 from ping_pong_button import PingPongButton
 from signal import pause
